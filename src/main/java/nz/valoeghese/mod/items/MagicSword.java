@@ -30,6 +30,6 @@ public class MagicSword extends SwordItem {
             this.powers.get(0).onUse(player, level, itemStack);
         }
 
-        return InteractionResultHolder.consume(itemStack);
+        return InteractionResultHolder.success(itemStack);
     }
 }
