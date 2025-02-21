@@ -5,6 +5,9 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import nz.valoeghese.mod.items.MagicSword;
 import org.jetbrains.annotations.Nullable;
@@ -34,6 +37,12 @@ public class Mod implements ModInitializer {
 								Direction.values()[(tag.getInt("direction"))],
 								null, 8000
 						);
+						// no stormlight or whatever so just make them glow if theyre not falling down
+						if (tag.getInt("direction") != Direction.DOWN.ordinal()) {
+							if (entity instanceof LivingEntity living) {
+								living.addEffect(new MobEffectInstance(MobEffects.GLOWING, 5));
+							}
+						}
 						return;
 					}
 				}
